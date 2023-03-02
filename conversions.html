@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+ <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <title> Conversions</title>
+ </head>
+<body>
+<h1>Satya Deepu Mandapati Shows Currency Conversions</h1>
+<h2>Getting input</h2>
+<form>
+    <label for="amount_input">Enter base amount</label>
+    <input type ="number" id="amount_base" name="amount_input" min=10 max=50 step=2 value=50> <br>
+
+    <label for="conversion_inputrate">Enter the Conversion Rate</label>
+    <input type ="number" id="conversion1" name="amount_input" min=10 max=50 step=2 value=35> <br> <br>
+
+    <input type="button" onclick="convert()" value="Show Conversions">
+</form>
+<p id="result">The Conversion results will be displayed</p>
+<form>
+    <input type="radio" name="action"  id="mean" name="average" value="mean">
+    <label for="mean">Mean</label><br>
+    <input type="radio" name="action" id="max" name="max" value="maximum">
+    <label for="max">Max</label><br>
+    <input type="radio" name="action" id="min" name="min" value="minimum">
+    <label for="min">Min</label><br>
+    <input type="button" onclick="chooseOp()" value="Get values from group">
+</form>
+<p id="result1">The text will be replaced</p>
+<script> 
+function convert(){
+    var toShow='';
+    var outstr = '';
+    var base = document.getElementById("amount_base").value
+    var conversion = document.getElementById("conversion1").value
+    var base1=base;
+        for(let i=1;i<=5;i++){
+            console.log(2**i);
+            toShow = toShow + base + ' is '+Math.round(base*conversion*100)/100 + ' ; ';
+            base=base1*(2**i);
+        }
+    
+    document.getElementById("result").innerHTML = 'Conversions are : ' + toShow ;
+}
+function chooseOp(){
+    var base = document.getElementById("amount_base").value
+    var conversion = document.getElementById("conversion1").value
+    let radio_avg = document.getElementById("mean")
+    let radio_max = document.getElementById("max")
+    let radio_min = document.getElementById("min")
+    out=document.getElementById("result1")
+    if(radio_avg.checked){
+        avg = (Number(base) + Number(conversion))/2
+        out.innerHTML = "Average of " + base + " and "+ conversion + " is "+avg
+        radio_avg.checked=false
+    }
+    else if(radio_max.checked){
+        max= Math.max(base,conversion)
+        out.innerHTML = " Max of " + base + " and "+ conversion + " is " + max
+        radio_max.checked=false
+    }
+    else if(radio_min.checked){
+        min = Math.min(base,conversion)
+        out.innerHTML = " Min of " + base + " and "+ conversion + " is " + min
+        radio_min.checked=false
+    }
+}
+</script>
+</body>
+</html> 
