@@ -1,45 +1,66 @@
 <!DOCTYPE html>
 <html>
-     <title>Painter Entry</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>Painter.html page</title>
 <body>
 
 <h2>Painter Entry by Satya Deepu Mandapati</h2>
 
 <form>
-    <label for="form1_password">The Hidden painter name</label>
-    <input type="password" id="form1_password" name="form1_password" min="10" max="50" step="2" value="Monet">
+    <label for="Painter">The hidden painter name</label>
+    <input type ="password" id="Painter" name="Painter" value="Monet"> <br>
     <br>
-    <label for="form1_guess">Guess the Painter</label>
-    <input type="text" id="form1_guess" name="form1_guess" autofocus="">
+    <label for="guessPainter">Guess the Painter</label>
+    <input type ="text" id="guessPainter" name="guessPainter" autofocus> <br>
     <br>
-
-    <input type="button" onclick="checkpainter()" value="Check the guess">
+    <input type="button" class="btn-primary" onclick="checkPainter()" value="Check the guess">
 </form>
-
-
-<p id="result">This text will be replaced </p>
-
+<p id="results">The count of good and oops guess </p>
+<div class="container">
+    <img src="Machilus.jpg"  width="100" height="100" id="img1" onclick="selectImage()">
+</div>
 <script> 
-var good=0;
+var good = 0;
 var oops=0;
-
-function checkpainter (){
+var count=0;
+function checkPainter(){
     console.log("Getting form values")
-    password = document.getElementById("form1_password").value
-    guess = document.getElementById("form1_guess").value
-    confirmed = confirm("Are these the values? "+password+" and "+guess)
-    
-    out = document.getElementById("result")
-    if(password==guess){
-        alert("U got it right")
-        good +=1
-        out.innerHTML = "Correct Answer:"+good +""+"Wrong answer:"+ ""+oops;
-    } else {
+    PainterName = document.getElementById("Painter").value
+    guesspaintername = document.getElementById("guessPainter").value
+    out = document.getElementById("results")
+    if(PainterName == guesspaintername){
+        alert("You got it right")
+        good = good +1
+        out.innerHTML = "Correct Answer: " +good + " "+  "Wrong Answer: " + oops;
+    }else
+    {
         alert("Sorry")
-        oops+=1
-        out.innerHTML = "Correct Answer:"+good +""+"Wrong answer:"+ ""+oops;
+        count = count+1
+        oops = oops+1
+        out.innerHTML = "Correct Answer: " +good + " "+  "Wrong Answer: " + oops;
+        if(count>10){
+            out.innerHTML=' Sorry, ran out of guesses'
+            document.getElementById('togglee').style.visibility = 'hidden'
+        }
     }
 }
+    var useImage=1;
+    function selectImage(){
+        switch(useImage){
+            case 1: 
+            useImage=2;
+            document.getElementById("img1").src="Nepeta.jpg";
+            break;
+            case 2: 
+            useImage=3;
+            document.getElementById("img1").src="Abelia.jpg";
+            break;
+            case 3: 
+            useImage=1;
+            document.getElementById("img1").src="Machilus.jpg";
+            break;
+        }
+    }
 </script>
 
 </body>
